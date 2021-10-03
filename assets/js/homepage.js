@@ -31,14 +31,14 @@ var getUserRepos = function(user) {
       // request was successful
       if (response.ok) {
         console.log(response);
-        response.json().then(function(data) {
-          console.log(data);
+        response.json().then(function(data) {          
           displayRepos(data, user);
         });
       } else {
         alert('Error: ' + response.statusText);
       }
     })
+    
     .catch(function(error) {
       alert('Unable to connect to GitHub');
     });
@@ -53,26 +53,26 @@ var displayRepos = function(repos, searchTerm) {
 
   repoSearchTerm.textContent = searchTerm;
 
-  // loop over repos
+  // loop over repos  
   for (var i = 0; i < repos.length; i++) {
     // format repo name
     var repoName = repos[i].owner.login + '/' + repos[i].name;
 
     // create a container for each repo
-    var repoEl = document.createElement('div');
+    var repoEl = document.createElement('a');
     repoEl.classList = 'list-item flex-row justify-space-between align-center';
-
+    repoEl.setAttribute("href", "single-repo.html?repo=" + repoName)
     // create a span element to hold repository name
     var titleEl = document.createElement('span');
     titleEl.textContent = repoName;
-
+    
     // append to container
     repoEl.appendChild(titleEl);
 
     // create a status element
     var statusEl = document.createElement('span');
     statusEl.classList = 'flex-row align-center';
-
+    
     // check if current repo has issues or not
     if (repos[i].open_issues_count > 0) {
       statusEl.innerHTML =
