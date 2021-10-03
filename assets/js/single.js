@@ -37,7 +37,7 @@ var getRepoIssues = function(repo) {
         });
         }
         else {
-            // if no repo was given, redirect to the homepage
+            // if not successful, redirect to the homepage
             document.location.replace("./index.html");
         }
     });
